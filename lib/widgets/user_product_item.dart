@@ -7,7 +7,7 @@ import '../providers/products.dart';
 class UserProductItem extends StatelessWidget {
     final String title;
     final String imageUrl;
-     final String id;
+     final String? id;
 
   UserProductItem(
     this.title,
@@ -29,7 +29,7 @@ class UserProductItem extends StatelessWidget {
               Navigator.of(context).pushNamed(EditProductScreen.routeName, arguments: id);
             }, icon: Icon(Icons.edit), color: Theme.of(context).primaryColor,),
             IconButton(onPressed: (){
-              Provider.of<Products>(context, listen: false).deleteProduct(id);
+              Provider.of<Products>(context, listen: false).deleteProduct(id!);
             }, icon: Icon(Icons.delete), color: Theme.of(context).errorColor,),
           ],
         ),
