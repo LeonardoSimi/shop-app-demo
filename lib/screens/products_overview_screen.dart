@@ -13,6 +13,10 @@ enum FilterOptions {
   All,
 }
 
+Future<void> _refreshProducts(BuildContext context) async {
+  await Provider.of<Products>(context, listen: false).fetchAndSetProducts();
+}
+
 class ProductsOverviewScreen extends StatefulWidget {
   @override
   _ProductsOverviewScreenState createState() => _ProductsOverviewScreenState();
@@ -85,6 +89,9 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           ],
         ),
         drawer: AppDrawer(),
-        body: _isLoading ? Center(child: CircularProgressIndicator(),) : ProductsGrid(_showOnlyFavorites));
+        body: _isLoading ? Center(child: CircularProgressIndicator(),) :
+        RefreshIndicator(
+            onRefresh: () => _refreshProducts(context),
+            child: ProductsGrid(_showOnlyFavorites)));
   }
 }
